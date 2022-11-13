@@ -1,0 +1,138 @@
+class Human { 
+    let name: String
+    let height: Int
+    let weight: Int
+    let gender: String
+
+    init(name: String, height: Int, weight: Int, gender: String){
+      self.name = name
+      self.height = height
+      self.weight = weight
+      self.gender = gender
+    }
+
+    func move(){
+        print("Я хожу")
+        
+    }
+}
+
+
+class Velosiperdist: Human{
+    override func move(){
+      super.move()
+	   print("Я катаюсь на велосипеде, пока пержу")
+	 }
+}
+
+class BegPerd: Human{
+    override func move(){
+    print("Я бегаю и пержу")
+    }
+}
+
+class PlavNezh: Human{
+    override func move(){
+		  super.move()
+        print("Я плаваю один раз")
+    }
+}
+
+class Kachek: Human{
+    var useprotein: Bool
+    var useanabolics: Bool
+	
+	init(name: String, height: Int, weight: Int, gender: String, useprotein: Bool, useanabolics: Bool){
+	
+		self.useprotein = useprotein
+		self.useanabolics = useanabolics
+		super.init(name: name, height: height, weight: weight, gender: gender)
+	}
+}
+
+class Animal {
+    var nick: Bool
+    var isHaveWool: Bool
+    var isVegan: Bool
+    var earLength: Double
+	
+	init( nick: Bool, isHaveWool: Bool, isVegan: Bool, earLength: Double){
+		self.nick = nick
+		self.isHaveWool = isHaveWool
+		self.isVegan = isVegan
+		self.earLength = earLength
+	}
+
+    func move(){
+        print("Я хожу на 4 лапах") 
+    }
+   
+}  
+
+class Carnivores: Animal{
+    //   init(){  
+		
+    override func move(){
+        print("Я бегаю за животными, чтобы есть")
+    }
+}
+
+class Herbivores: Animal{
+    override func move(){
+        print("Я бегаю от животных, чтобы не умереть")
+    }
+}
+
+func showAllPeople(array: [Human]){
+     for human in array {
+         print("My Name is \(human.name) \nMy height is \(human.height) \nMy weight is \(human.weight) \nI am a \(human.gender)")
+         human.move()
+		 if let kachek = human as? Kachek {
+		 	print("That is \(kachek.useprotein) that I use protein \nThat is \(kachek.useanabolics) that I use anabolics")
+		 }      
+		  
+      } 
+}
+
+func reversePeople(array: [Human]){
+    let newArr = Array(array.reversed())
+	showAllPeople(array: newArr)
+}
+
+func uniteAll(people: [Human], animals: [Animal]) -> [Any] {
+    var allArr = [Any]()
+	allArr.append(people)
+	allArr.append(animals)
+	return allArr
+}
+
+// func showAll(array: [AnyObject]){
+// //print(Something)
+// }
+// func zipAll(people: [Human], animals: [Animal]){
+//     //set Loop and refound arrays
+
+// Для примера и проверки работоспособности классов. =)
+
+
+
+let human = Human(name: "Oleg", height: 190, weight: 100, gender: "Male")
+let velo = Velosiperdist(name: "Anna", height: 170, weight: 57, gender: "Female")
+//velo.move()
+let kach = Kachek(name: "Arnold", height: 183, weight: 120, gender: "Male", useprotein: true, useanabolics: false)
+
+
+let dog = Carnivores(nick: true, isHaveWool: false, isVegan: false, earLength: 12.0)
+let horse = Herbivores(nick: false, isHaveWool: false, isVegan: true, earLength: 18.0)
+
+
+
+var arrH = [human, velo, kach] 
+
+//print(uniteAll(people: [Human], animals: [Animal]))
+
+//showAllPeople(array: arr)  Done 
+//reversePeople(array: arr)  Done
+
+var arrA = [dog, horse]
+print(uniteAll(people: arrH, animals: arrA))
